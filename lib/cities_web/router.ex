@@ -19,6 +19,12 @@ defmodule CitiesWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/cities", CitiesWeb do
+    pipe_through :api
+
+    get "/city", CityController, :get_list_of_cities
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CitiesWeb do
   #   pipe_through :api

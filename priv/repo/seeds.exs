@@ -20,9 +20,9 @@ alias Cities.Cities.List
   city_id = city_list["id"]
   lat = city_list["coord"]["lat"]
   lon = city_list["coord"]["lon"]
-  city_name = city_list["name"]
-  state = city_list["state"] || ""
-  country = city_list["state"] || ""
+  city_name = city_list["name"] |> String.capitalize() || ""
+  state = city_list["state"] |> String.capitalize() || ""
+  country = city_list["state"] |> String.capitalize() || ""
 
   %List{
     city_id: city_id |> Kernel.to_string(),
