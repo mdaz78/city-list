@@ -9,3 +9,28 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Cities.Repo
+alias Cities.Cities.List
+
+"priv/seed_data/city-list.json"
+|> File.read!()
+|> Jason.decode!()
+|> Enum.each(fn city_list ->
+  city_id = city_list["id"]
+  lat = city_list["coord"]["lat"]
+  lon = city_list["coord"]["lon"]
+  city_name = city_list["name"]
+  state = city_list["state"] || ""
+  country = city_list["state"] || ""
+
+  %List{
+    city_id: city_id |> Kernel.to_string(),
+    lat: lat,
+    lon: lon,
+    city_name: city_name,
+    state: state,
+    country: country
+  }
+  |> Repo.insert!()
+end)
